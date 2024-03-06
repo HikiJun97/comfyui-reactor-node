@@ -9,8 +9,10 @@ from insightface.app.common import Face
 from safetensors.torch import save_file, safe_open
 from tqdm import tqdm
 import urllib.request
+from scripts.reactor_logger import log_entry_exit
 
 
+@log_entry_exit
 def tensor_to_pil(img_tensor, batch_index=0):
     # Convert tensor of shape [batch_size, channels, height, width] at the batch_index to PIL Image
     img_tensor = img_tensor[batch_index].unsqueeze(0)

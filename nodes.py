@@ -19,7 +19,7 @@ from scripts.reactor_faceswap import (
     analyze_faces,
     half_det_size
 )
-from scripts.reactor_logger import logger
+from scripts.reactor_logger import logger, log_entry_exit
 from reactor_utils import (
     batch_tensor_to_pil,
     batched_pil_to_tensor,
@@ -117,6 +117,7 @@ class reactor:
     def __init__(self):
         self.face_helper = None
 
+    @log_entry_exit
     def restore_face(
             self,
             input_image,

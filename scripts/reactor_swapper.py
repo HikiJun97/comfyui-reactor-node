@@ -15,7 +15,7 @@ try:
 except:
     cuda = None
 
-from scripts.reactor_logger import logger
+from scripts.reactor_logger import logger, log_entry_exit
 from reactor_utils import move_path, get_image_md5hash
 import folder_paths
 
@@ -143,6 +143,7 @@ def get_face_single(img_data: np.ndarray, face, face_index=0, det_size=(640, 640
         return None, 0
 
 
+@log_entry_exit
 def swap_face(
     source_img: Union[Image.Image, None],
     target_img: Image.Image,
@@ -153,6 +154,7 @@ def swap_face(
     gender_target: int = 0,
     face_model: Union[Face, None] = None,
 ):
+    logger.INFO(f"gender_source: {gender_source} / gender_target: {gender_target}")
     global SOURCE_FACES, SOURCE_IMAGE_HASH, TARGET_FACES, TARGET_IMAGE_HASH
     result_image = target_img
 

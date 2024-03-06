@@ -42,7 +42,7 @@ class FaceSwapScript(scripts.Script):
         self.enable = enable
         if self.enable:
 
-            self.source = img    
+            self.source = img
             self.swap_in_generated = swap_in_generated
             self.gender_source = gender_source
             self.gender_target = gender_target

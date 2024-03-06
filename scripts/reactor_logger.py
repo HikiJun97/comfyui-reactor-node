@@ -1,3 +1,4 @@
+import functools
 import logging
 import copy
 import sys
@@ -45,3 +46,20 @@ if not logger.handlers:
 loglevel_string = getattr(shared.cmd_opts, "reactor_loglevel", "INFO")
 loglevel = getattr(logging, loglevel_string.upper(), "info")
 logger.setLevel(loglevel)
+
+def log_entry_exit(func):
+    """
+    함수의 진입과 종료를 로깅하는 데코레이터.
+    """
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        # 함수 진입 로깅
+        logger.info(f"Calling {func.__name__}")
+        
+        value = func(*args, **kwargs)
+        
+        # 함수 종료 로깅 (선택적)
+        logger.info(f"{func.__name__!r} returned")  
+        return value
+    return wrapper
+
